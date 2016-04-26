@@ -78,6 +78,32 @@ Note: To be able to associate customers to campaigns, first you must guarantee t
 ### Power BI Reports
 (to be completed)
 
+To work with the Power BI reports you will need to install and use the Power BI Desktop Application, available at: https://powerbi.microsoft.com/en-us/documentation/powerbi-desktop-get-the-desktop/#to-download-and-install-power-bi-desktop
+
+The Power BI Report files are named:
+ * CSP_CSV_Reports.pbix - For the CSV generated analysis
+ * CSP_Database_Reports.pbix - For the Database generated analysis
+
+#### Refreshing the reports data sources
+
+##### CSP CSV files
+To refresh the report follow these steps on Power BI Desktop:
+
+1. Open the report file
+2. On the ribbon, "Home" tab, click "Edit Queries" <br/>
+![PowerBI_EditQueries](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_EditQueries.png)
+3. On left side, select the "Customers" table <br/>
+![PowerBI_SelectTable](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_SelectTable.png)
+4. On the right side, click on the “Source” ribbon <br/>
+![PowerBI_ChangeSource](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_ChangeSource.png)
+5. Select a new Path to *.csv report (note the settings presented in the picture) <br/>
+![PowerBI_BrowseCSV](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png)
+6. Repeat the last three steps and update the Subscriptions and Skus tables also
+
+##### CSP Reporting Database
+(to be completed)
+
+NOTE: The Power BI reports can be published to a Office 365 tenant with Power BI enabled, for easier sharing within a team.
 
 Final disclaimer: The samples are provided freely as a proof of concept as-is, with no support whatsoever.
 http://www.create.pt
