@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.CSP.GitHub.Reporting", "Create.CSP.GitHub.Reporting.csproj", "{303C2C06-1CA1-4E26-8850-3B20A28BC1E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.CSP.GitHub.Reporting.Job", "Job\Create.CSP.GitHub.Reporting.Job.csproj", "{303C2C06-1CA1-4E26-8850-3B20A28BC1E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.CSP.GitHub.Reporting.Portal", "Portal\Create.CSP.GitHub.Reporting.Portal.csproj", "{CC26D64A-BC79-4DF2-98DF-30BC58471F4A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Create.CSP.GitHub.Reporting.Database", "Database\Create.CSP.GitHub.Reporting.Database.sqlproj", "{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Create.CSP.GitHub.Reporting.Database.Model", "DatabaseModel\Create.CSP.GitHub.Reporting.Database.Model.csproj", "{9D48768D-460D-4842-9493-C1B2090D5423}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerBIs", "PowerBIs", "{C06FEAB8-0B9A-452F-BF13-0E4A078FDC2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,20 @@ Global
 		{303C2C06-1CA1-4E26-8850-3B20A28BC1E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{303C2C06-1CA1-4E26-8850-3B20A28BC1E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{303C2C06-1CA1-4E26-8850-3B20A28BC1E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC26D64A-BC79-4DF2-98DF-30BC58471F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC26D64A-BC79-4DF2-98DF-30BC58471F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC26D64A-BC79-4DF2-98DF-30BC58471F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC26D64A-BC79-4DF2-98DF-30BC58471F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B49FA1-94FD-417C-BD08-DA14F4C02D0C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9D48768D-460D-4842-9493-C1B2090D5423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D48768D-460D-4842-9493-C1B2090D5423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D48768D-460D-4842-9493-C1B2090D5423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D48768D-460D-4842-9493-C1B2090D5423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

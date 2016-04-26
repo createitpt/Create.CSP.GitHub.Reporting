@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D48768D-460D-4842-9493-C1B2090D5423}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Create.CSP.GitHub.Reporting.Database.Model</RootNamespace>
+    <AssemblyName>Create.CSP.GitHub.Reporting.Database.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivationReport.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CorrelationId.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSPDatabaseModelEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSPDatabaseModelEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSPDatabaseModelEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSPDatabaseModelEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSPDatabaseModelEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CSPDatabaseModelEntities.Partial.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customers_History.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domains_History.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\ActivationReportsManager.cs" />
+    <Compile Include="Managers\BaseManager.cs" />
+    <Compile Include="Managers\MarketingCampaignManager.cs" />
+    <Compile Include="Managers\MarketingCampaignsCustomer.cs" />
+    <Compile Include="Managers\SubscribedSKUsManager.cs" />
+    <Compile Include="Managers\CorrelationIdsManager.cs" />
+    <Compile Include="Managers\CustomersManager.cs" />
+    <Compile Include="Managers\DomainsManager.cs" />
+    <Compile Include="Managers\SubscriptionsManager.cs" />
+    <Compile Include="MarketingCampaign.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarketingCampaignsCustomer.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscribedSKU.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubscribedSKUs_History.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subscription.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subscriptions_History.cs">
+      <DependentUpon>CSPDatabaseModelEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="CSPDatabaseModelEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CSPDatabaseModelEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="CSPDatabaseModelEntities.edmx.diagram">
+      <DependentUpon>CSPDatabaseModelEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSPDatabaseModelEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSPDatabaseModelEntities.edmx</DependentUpon>
+      <LastGenOutput>CSPDatabaseModelEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CSPDatabaseModelEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSPDatabaseModelEntities.edmx</DependentUpon>
+      <LastGenOutput>CSPDatabaseModelEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

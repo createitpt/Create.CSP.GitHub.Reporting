@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf36904a55c742169fe558df46956088" Name="Diagram1">
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.ActivationReport" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.CorrelationId" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Customer" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Customers_History" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Domain" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Domains_History" Width="1.5" PointX="7.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.MarketingCampaign" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.MarketingCampaignsCustomer" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.SubscribedSKU" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.SubscribedSKUs_History" Width="1.5" PointX="10.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Subscription" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Subscriptions_History" Width="1.5" PointX="12.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Create.CSP.GitHub.Reporting.Database.Model.Log" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_ActivationReport_CorrelationIds" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_ActivationReport_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_ActivationReport_SubscribedSKUs" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Customers_History_CorrelationIds" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Domains_History_CorrelationIds" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_SubscribedSKUs_History_CorrelationIds" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Subscriptions_History_CorrelationIds" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Domains_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_MarketingCampaignsCustomers_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_SubscribedSKUs_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Subscriptions_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Domains_History_Customers_History" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_SubscribedSKUs_History_Customers_History" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Subscriptions_History_Customers_History" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_MarketingCampaignsCustomers_MarketingCampaigns" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Subscriptions_SubscribedSKUs" ManuallyRouted="false" />
+        <AssociationConnector Association="Create.CSP.GitHub.Reporting.Database.Model.FK_Subscriptions_History_SubscribedSKUs_History" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

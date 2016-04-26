@@ -1,0 +1,120 @@
+/* Backgrounds ----------------------------------------------------------*/
+
+#primary input[type="button"]:hover, 
+#primary input[type="submit"]:hover,
+.tags li:hover,
+.image_post ul li,
+.accordion-trigger:hover,
+.promotion_table .head_table,
+.search_domain .button:hover,
+.bg_logo,
+.jBar .button,
+.downarrow,
+.jRibbon,
+.line,
+.titles span,
+.section_title h1,
+.item_table .button:hover,
+.tooltip-inner,
+.button:hover,
+.camera_captionb .button,
+.tooltip-inner,
+.button:hover,
+.btn-primary,
+.btn-primary:hover,
+.camera_captionb .button,
+.paginations li:hover,
+.paginations .active,
+#sidebar .tagcloud a:hover,
+#searchform #searchsubmit,
+#calendar_wrap #today,
+.camera_prevThumbs, .camera_nextThumbs, .camera_prev, .camera_next, .camera_commands, .camera_thumbs_cont,
+.camera_wrap .camera_pag .camera_pag_ul li.cameracurrent > span,
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span,
+#theme-options .layout-style li.active,
+.pagination > .active > a,
+.pagination > .active:hover > a{
+	background: #0099ff;
+	background-color: #0099ff;
+}
+.accordion-trigger.active,
+.accordion-trigger:hover{
+	background: #0099ff url("../../../img/img-theme/toggle.png") no-repeat right -69px;
+}
+.name_team h5,
+.camera_captionc h1,
+.camera_captionb h1{
+	background: #0099ff;
+	background: rgba(0, 136, 204, 0.8);
+}
+.overlay{
+	background: #0099ff url("../../../img/img-theme/more.png") no-repeat center center;;
+	background: rgba(0, 136, 204, 0.6) url("../../../img/img-theme/more.png") no-repeat center center;
+}
+
+/* Colors --------------------------------------------------------------*/
+
+.social_team li a:hover,
+.footer_down .nav_footer li a:hover,
+.head_table h2,
+.head_feature h6,
+.sf-menu li li a:hover,
+.sf-menu > li > a:hover,
+.jBar ul li span,
+.text_resalted h3,
+.post a h3:hover,
+ul.social_footer li:hover a,
+.info_head li a:hover,
+.info_head li a:focus,
+.owl-theme .owl-controls .owl-buttons div i,
+ul.contact_footer li a:hover,
+.meta li a,
+.title_comment span a,
+.pagination > li > a, .pagination > li > span,
+.pagination > li:hover a,
+.portfolioFilter .current,
+.portfolioFilter a:hover{
+	color: #0099ff;
+}
+
+/* Borders --------------------------------------------------------------*/
+
+.sf-menu > li.current > a {
+	border-top: 3px solid #0099ff;
+}
+.sf-menu > li.current > a:after {
+	border-top: 12px solid #0099ff;
+}
+.item_table{
+	border: solid 3px #0099ff;	
+}
+.item_table.promotion_table .head_table:before{
+	border-top: 35px solid #0099ff;
+}
+.arrow_domain{	
+	border-right: 6px solid #0099ff;
+}
+.arrow_domain:before{
+	border-left: 10px solid #0099ff;
+}
+.section_title h1:after{
+	border-right: 30px solid #0099ff;
+}
+.titles{	
+	border-bottom: 1px solid #0099ff;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: #0099ff;
+}
+.pagination > .active > a,
+.pagination > .active:hover > a{
+	border-color: #0099ff;
+}
+.portfolioFilter .current,
+.portfolioFilter a:hover{
+	border-bottom: 3px solid #0099ff;
+}
+.item-work .info-work .icons-work{
+	border-top: 3px solid #0099ff;
+}

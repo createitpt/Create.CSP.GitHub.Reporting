@@ -1,0 +1,1182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Create.CSP.GitHub.Reporting.Database.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivationReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CorrelationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="nvarchar" MaxLength="255" />
+          <Property Name="ActionType" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ActionSubType" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CorrelationIds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Region" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Customers_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Region" Type="nvarchar" MaxLength="255" />
+          <Property Name="State" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Domains">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Domains_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Create.CSP.Reporting.dbo.Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Exception" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MarketingCampaigns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarketingCampaignsCustomers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MarketingCampaignId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubscribedSKUs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SkuBusinessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="OfferName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CapabilityStatus" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ActiveSeats" Type="int" Nullable="false" />
+          <Property Name="InGracePeriodSeats" Type="int" Nullable="false" />
+          <Property Name="DisabledSeats" Type="int" Nullable="false" />
+          <Property Name="AssignedSeats" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubscribedSKUs_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SkuBusinessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PartNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="OfferName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CapabilityStatus" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ActiveSeats" Type="int" Nullable="false" />
+          <Property Name="InGracePeriodSeats" Type="int" Nullable="false" />
+          <Property Name="DisabledSeats" Type="int" Nullable="false" />
+          <Property Name="AssignedSeats" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscriptions_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ActivationReport_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationIds" Multiplicity="1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivationReport_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivationReport_SubscribedSKUs">
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKUs" Multiplicity="0..1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationIds" Multiplicity="1" />
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Domains" Type="Self.Domains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationIds" Multiplicity="1" />
+          <End Role="Domains_History" Type="Self.Domains_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="Domains_History" Type="Self.Domains_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCampaignsCustomers_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="MarketingCampaignsCustomers" Type="Self.MarketingCampaignsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingCampaignsCustomers">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCampaignsCustomers_MarketingCampaigns">
+          <End Role="MarketingCampaigns" Type="Self.MarketingCampaigns" Multiplicity="1" />
+          <End Role="MarketingCampaignsCustomers" Type="Self.MarketingCampaignsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarketingCampaigns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingCampaignsCustomers">
+              <PropertyRef Name="MarketingCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKUs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationIds" Multiplicity="1" />
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationIds" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_SubscribedSKUs_History">
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_SubscribedSKUs">
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKUs" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetCorrelationIdFromContext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CorrelationId" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="SetCorrelationIdToContext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CorrelationId" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CreateCSPGitHubReportingDatabaseModelStoreContainer">
+          <EntitySet Name="ActivationReport" EntityType="Self.ActivationReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CorrelationIds" EntityType="Self.CorrelationIds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers_History" EntityType="Self.Customers_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domains" EntityType="Self.Domains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Domains_History" EntityType="Self.Domains_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarketingCampaigns" EntityType="Self.MarketingCampaigns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarketingCampaignsCustomers" EntityType="Self.MarketingCampaignsCustomers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscribedSKUs" EntityType="Self.SubscribedSKUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscribedSKUs_History" EntityType="Self.SubscribedSKUs_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions_History" EntityType="Self.Subscriptions_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log].[Id] AS [Id], 
+    [Log].[Date] AS [Date], 
+    [Log].[Thread] AS [Thread], 
+    [Log].[Level] AS [Level], 
+    [Log].[Logger] AS [Logger], 
+    [Log].[Message] AS [Message], 
+    [Log].[Exception] AS [Exception]
+    FROM [dbo].[Log] AS [Log]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ActivationReport_CorrelationIds" Association="Self.FK_ActivationReport_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="ActivationReport" EntitySet="ActivationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivationReport_Customers" Association="Self.FK_ActivationReport_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ActivationReport" EntitySet="ActivationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivationReport_SubscribedSKUs" Association="Self.FK_ActivationReport_SubscribedSKUs">
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+            <End Role="ActivationReport" EntitySet="ActivationReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_History_CorrelationIds" Association="Self.FK_Customers_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Customers_History" EntitySet="Customers_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_Customers" Association="Self.FK_Domains_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Domains" EntitySet="Domains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_History_CorrelationIds" Association="Self.FK_Domains_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Domains_History" EntitySet="Domains_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_History_Customers_History" Association="Self.FK_Domains_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="Domains_History" EntitySet="Domains_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCampaignsCustomers_Customers" Association="Self.FK_MarketingCampaignsCustomers_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="MarketingCampaignsCustomers" EntitySet="MarketingCampaignsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCampaignsCustomers_MarketingCampaigns" Association="Self.FK_MarketingCampaignsCustomers_MarketingCampaigns">
+            <End Role="MarketingCampaigns" EntitySet="MarketingCampaigns" />
+            <End Role="MarketingCampaignsCustomers" EntitySet="MarketingCampaignsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_Customers" Association="Self.FK_SubscribedSKUs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_History_CorrelationIds" Association="Self.FK_SubscribedSKUs_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_History_Customers_History" Association="Self.FK_SubscribedSKUs_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_Customers" Association="Self.FK_Subscriptions_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_CorrelationIds" Association="Self.FK_Subscriptions_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_Customers_History" Association="Self.FK_Subscriptions_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_SubscribedSKUs_History" Association="Self.FK_Subscriptions_History_SubscribedSKUs_History">
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_SubscribedSKUs" Association="Self.FK_Subscriptions_SubscribedSKUs">
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Create.CSP.GitHub.Reporting.Database.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActivationReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CorrelationId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ActionType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActionSubType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CorrelationId1" Relationship="Self.FK_ActivationReport_CorrelationIds" FromRole="ActivationReport" ToRole="CorrelationIds" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_ActivationReport_Customers" FromRole="ActivationReport" ToRole="Customers" />
+          <NavigationProperty Name="SubscribedSKU" Relationship="Self.FK_ActivationReport_SubscribedSKUs" FromRole="ActivationReport" ToRole="SubscribedSKUs" />
+        </EntityType>
+        <EntityType Name="CorrelationId">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActivationReports" Relationship="Self.FK_ActivationReport_CorrelationIds" FromRole="CorrelationIds" ToRole="ActivationReport" />
+          <NavigationProperty Name="Customers_History" Relationship="Self.FK_Customers_History_CorrelationIds" FromRole="CorrelationIds" ToRole="Customers_History" />
+          <NavigationProperty Name="Domains_History" Relationship="Self.FK_Domains_History_CorrelationIds" FromRole="CorrelationIds" ToRole="Domains_History" />
+          <NavigationProperty Name="SubscribedSKUs_History" Relationship="Self.FK_SubscribedSKUs_History_CorrelationIds" FromRole="CorrelationIds" ToRole="SubscribedSKUs_History" />
+          <NavigationProperty Name="Subscriptions_History" Relationship="Self.FK_Subscriptions_History_CorrelationIds" FromRole="CorrelationIds" ToRole="Subscriptions_History" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TenantId" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActivationReports" Relationship="Self.FK_ActivationReport_Customers" FromRole="Customers" ToRole="ActivationReport" />
+          <NavigationProperty Name="Domains" Relationship="Self.FK_Domains_Customers" FromRole="Customers" ToRole="Domains" />
+          <NavigationProperty Name="MarketingCampaignsCustomers" Relationship="Self.FK_MarketingCampaignsCustomers_Customers" FromRole="Customers" ToRole="MarketingCampaignsCustomers" />
+          <NavigationProperty Name="SubscribedSKUs" Relationship="Self.FK_SubscribedSKUs_Customers" FromRole="Customers" ToRole="SubscribedSKUs" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_Subscriptions_Customers" FromRole="Customers" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="Customers_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TenantId" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CorrelationId1" Relationship="Self.FK_Customers_History_CorrelationIds" FromRole="Customers_History" ToRole="CorrelationIds" />
+          <NavigationProperty Name="Domains_History" Relationship="Self.FK_Domains_History_Customers_History" FromRole="Customers_History" ToRole="Domains_History" />
+          <NavigationProperty Name="SubscribedSKUs_History" Relationship="Self.FK_SubscribedSKUs_History_Customers_History" FromRole="Customers_History" ToRole="SubscribedSKUs_History" />
+          <NavigationProperty Name="Subscriptions_History" Relationship="Self.FK_Subscriptions_History_Customers_History" FromRole="Customers_History" ToRole="Subscriptions_History" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Domains_Customers" FromRole="Domains" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Domains_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CorrelationId1" Relationship="Self.FK_Domains_History_CorrelationIds" FromRole="Domains_History" ToRole="CorrelationIds" />
+          <NavigationProperty Name="Customers_History" Relationship="Self.FK_Domains_History_Customers_History" FromRole="Domains_History" ToRole="Customers_History" />
+        </EntityType>
+        <EntityType Name="MarketingCampaign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MarketingCampaignsCustomers" Relationship="Self.FK_MarketingCampaignsCustomers_MarketingCampaigns" FromRole="MarketingCampaigns" ToRole="MarketingCampaignsCustomers" />
+        </EntityType>
+        <EntityType Name="MarketingCampaignsCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarketingCampaignId" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_MarketingCampaignsCustomers_Customers" FromRole="MarketingCampaignsCustomers" ToRole="Customers" />
+          <NavigationProperty Name="MarketingCampaign" Relationship="Self.FK_MarketingCampaignsCustomers_MarketingCampaigns" FromRole="MarketingCampaignsCustomers" ToRole="MarketingCampaigns" />
+        </EntityType>
+        <EntityType Name="SubscribedSKU">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SkuBusinessId" Type="Guid" Nullable="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfferName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CapabilityStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ActiveSeats" Type="Int32" Nullable="false" />
+          <Property Name="InGracePeriodSeats" Type="Int32" Nullable="false" />
+          <Property Name="DisabledSeats" Type="Int32" Nullable="false" />
+          <Property Name="AssignedSeats" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActivationReports" Relationship="Self.FK_ActivationReport_SubscribedSKUs" FromRole="SubscribedSKUs" ToRole="ActivationReport" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_SubscribedSKUs_Customers" FromRole="SubscribedSKUs" ToRole="Customers" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_Subscriptions_SubscribedSKUs" FromRole="SubscribedSKUs" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="SubscribedSKUs_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SkuBusinessId" Type="Guid" Nullable="false" />
+          <Property Name="PartNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfferName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CapabilityStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ActiveSeats" Type="Int32" Nullable="false" />
+          <Property Name="InGracePeriodSeats" Type="Int32" Nullable="false" />
+          <Property Name="DisabledSeats" Type="Int32" Nullable="false" />
+          <Property Name="AssignedSeats" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CorrelationId1" Relationship="Self.FK_SubscribedSKUs_History_CorrelationIds" FromRole="SubscribedSKUs_History" ToRole="CorrelationIds" />
+          <NavigationProperty Name="Customers_History" Relationship="Self.FK_SubscribedSKUs_History_Customers_History" FromRole="SubscribedSKUs_History" ToRole="Customers_History" />
+          <NavigationProperty Name="Subscriptions_History" Relationship="Self.FK_Subscriptions_History_SubscribedSKUs_History" FromRole="SubscribedSKUs_History" ToRole="Subscriptions_History" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Subscriptions_Customers" FromRole="Subscriptions" ToRole="Customers" />
+          <NavigationProperty Name="SubscribedSKU" Relationship="Self.FK_Subscriptions_SubscribedSKUs" FromRole="Subscriptions" ToRole="SubscribedSKUs" />
+        </EntityType>
+        <EntityType Name="Subscriptions_History">
+          <Key>
+            <PropertyRef Name="CorrelationId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CorrelationId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CustomerId" Type="Guid" Nullable="false" />
+          <Property Name="SubscribedSKUId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CorrelationId1" Relationship="Self.FK_Subscriptions_History_CorrelationIds" FromRole="Subscriptions_History" ToRole="CorrelationIds" />
+          <NavigationProperty Name="Customers_History" Relationship="Self.FK_Subscriptions_History_Customers_History" FromRole="Subscriptions_History" ToRole="Customers_History" />
+          <NavigationProperty Name="SubscribedSKUs_History" Relationship="Self.FK_Subscriptions_History_SubscribedSKUs_History" FromRole="Subscriptions_History" ToRole="SubscribedSKUs_History" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ActivationReport_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationId" Multiplicity="1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivationReport_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivationReport_SubscribedSKUs">
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKU" Multiplicity="0..1" />
+          <End Role="ActivationReport" Type="Self.ActivationReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivationReport">
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationId" Multiplicity="1" />
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationId" Multiplicity="1" />
+          <End Role="Domains_History" Type="Self.Domains_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationId" Multiplicity="1" />
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_CorrelationIds">
+          <End Role="CorrelationIds" Type="Self.CorrelationId" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CorrelationIds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Domains" Type="Self.Domain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCampaignsCustomers_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="MarketingCampaignsCustomers" Type="Self.MarketingCampaignsCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingCampaignsCustomers">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domains_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="Domains_History" Type="Self.Domains_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Domains_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscribedSKUs_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_Customers_History">
+          <End Role="Customers_History" Type="Self.Customers_History" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCampaignsCustomers_MarketingCampaigns">
+          <End Role="MarketingCampaigns" Type="Self.MarketingCampaign" Multiplicity="1" />
+          <End Role="MarketingCampaignsCustomers" Type="Self.MarketingCampaignsCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarketingCampaigns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarketingCampaignsCustomers">
+              <PropertyRef Name="MarketingCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_SubscribedSKUs">
+          <End Role="SubscribedSKUs" Type="Self.SubscribedSKU" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriptions_History_SubscribedSKUs_History">
+          <End Role="SubscribedSKUs_History" Type="Self.SubscribedSKUs_History" Multiplicity="1" />
+          <End Role="Subscriptions_History" Type="Self.Subscriptions_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubscribedSKUs_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions_History">
+              <PropertyRef Name="CorrelationId" />
+              <PropertyRef Name="SubscribedSKUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CSPDatabaseModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivationReports" EntityType="Self.ActivationReport" />
+          <EntitySet Name="CorrelationIds" EntityType="Self.CorrelationId" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Customers_History" EntityType="Self.Customers_History" />
+          <EntitySet Name="Domains" EntityType="Self.Domain" />
+          <EntitySet Name="Domains_History" EntityType="Self.Domains_History" />
+          <EntitySet Name="MarketingCampaigns" EntityType="Self.MarketingCampaign" />
+          <EntitySet Name="MarketingCampaignsCustomers" EntityType="Self.MarketingCampaignsCustomer" />
+          <EntitySet Name="SubscribedSKUs" EntityType="Self.SubscribedSKU" />
+          <EntitySet Name="SubscribedSKUs_History" EntityType="Self.SubscribedSKUs_History" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+          <EntitySet Name="Subscriptions_History" EntityType="Self.Subscriptions_History" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <AssociationSet Name="FK_ActivationReport_CorrelationIds" Association="Self.FK_ActivationReport_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="ActivationReport" EntitySet="ActivationReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivationReport_Customers" Association="Self.FK_ActivationReport_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ActivationReport" EntitySet="ActivationReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivationReport_SubscribedSKUs" Association="Self.FK_ActivationReport_SubscribedSKUs">
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+            <End Role="ActivationReport" EntitySet="ActivationReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_History_CorrelationIds" Association="Self.FK_Customers_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Customers_History" EntitySet="Customers_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_History_CorrelationIds" Association="Self.FK_Domains_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Domains_History" EntitySet="Domains_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_History_CorrelationIds" Association="Self.FK_SubscribedSKUs_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_CorrelationIds" Association="Self.FK_Subscriptions_History_CorrelationIds">
+            <End Role="CorrelationIds" EntitySet="CorrelationIds" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_Customers" Association="Self.FK_Domains_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Domains" EntitySet="Domains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCampaignsCustomers_Customers" Association="Self.FK_MarketingCampaignsCustomers_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="MarketingCampaignsCustomers" EntitySet="MarketingCampaignsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_Customers" Association="Self.FK_SubscribedSKUs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_Customers" Association="Self.FK_Subscriptions_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domains_History_Customers_History" Association="Self.FK_Domains_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="Domains_History" EntitySet="Domains_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscribedSKUs_History_Customers_History" Association="Self.FK_SubscribedSKUs_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_Customers_History" Association="Self.FK_Subscriptions_History_Customers_History">
+            <End Role="Customers_History" EntitySet="Customers_History" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCampaignsCustomers_MarketingCampaigns" Association="Self.FK_MarketingCampaignsCustomers_MarketingCampaigns">
+            <End Role="MarketingCampaigns" EntitySet="MarketingCampaigns" />
+            <End Role="MarketingCampaignsCustomers" EntitySet="MarketingCampaignsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_SubscribedSKUs" Association="Self.FK_Subscriptions_SubscribedSKUs">
+            <End Role="SubscribedSKUs" EntitySet="SubscribedSKUs" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriptions_History_SubscribedSKUs_History" Association="Self.FK_Subscriptions_History_SubscribedSKUs_History">
+            <End Role="SubscribedSKUs_History" EntitySet="SubscribedSKUs_History" />
+            <End Role="Subscriptions_History" EntitySet="Subscriptions_History" />
+          </AssociationSet>
+          <FunctionImport Name="GetCorrelationIdFromContext">
+            <Parameter Name="CorrelationId" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SetCorrelationIdToContext">
+            <Parameter Name="CorrelationId" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CreateCSPGitHubReportingDatabaseModelStoreContainer" CdmEntityContainer="CSPDatabaseModelEntities">
+          <EntitySetMapping Name="ActivationReports">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.ActivationReport">
+              <MappingFragment StoreEntitySet="ActivationReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CorrelationId" ColumnName="CorrelationId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SubscribedSKUId" ColumnName="SubscribedSKUId" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="ActionSubType" ColumnName="ActionSubType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorrelationIds">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.CorrelationId">
+              <MappingFragment StoreEntitySet="CorrelationIds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers_History">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Customers_History">
+              <MappingFragment StoreEntitySet="Customers_History">
+                <ScalarProperty Name="CorrelationId" ColumnName="CorrelationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domains">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Domain">
+              <MappingFragment StoreEntitySet="Domains">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domains_History">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Domains_History">
+              <MappingFragment StoreEntitySet="Domains_History">
+                <ScalarProperty Name="CorrelationId" ColumnName="CorrelationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketingCampaigns">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.MarketingCampaign">
+              <MappingFragment StoreEntitySet="MarketingCampaigns">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketingCampaignsCustomers">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.MarketingCampaignsCustomer">
+              <MappingFragment StoreEntitySet="MarketingCampaignsCustomers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MarketingCampaignId" ColumnName="MarketingCampaignId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscribedSKUs">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.SubscribedSKU">
+              <MappingFragment StoreEntitySet="SubscribedSKUs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SkuBusinessId" ColumnName="SkuBusinessId" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+                <ScalarProperty Name="CapabilityStatus" ColumnName="CapabilityStatus" />
+                <ScalarProperty Name="ActiveSeats" ColumnName="ActiveSeats" />
+                <ScalarProperty Name="InGracePeriodSeats" ColumnName="InGracePeriodSeats" />
+                <ScalarProperty Name="DisabledSeats" ColumnName="DisabledSeats" />
+                <ScalarProperty Name="AssignedSeats" ColumnName="AssignedSeats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscribedSKUs_History">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.SubscribedSKUs_History">
+              <MappingFragment StoreEntitySet="SubscribedSKUs_History">
+                <ScalarProperty Name="CorrelationId" ColumnName="CorrelationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SkuBusinessId" ColumnName="SkuBusinessId" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+                <ScalarProperty Name="CapabilityStatus" ColumnName="CapabilityStatus" />
+                <ScalarProperty Name="ActiveSeats" ColumnName="ActiveSeats" />
+                <ScalarProperty Name="InGracePeriodSeats" ColumnName="InGracePeriodSeats" />
+                <ScalarProperty Name="DisabledSeats" ColumnName="DisabledSeats" />
+                <ScalarProperty Name="AssignedSeats" ColumnName="AssignedSeats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SubscribedSKUId" ColumnName="SubscribedSKUId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions_History">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Subscriptions_History">
+              <MappingFragment StoreEntitySet="Subscriptions_History">
+                <ScalarProperty Name="CorrelationId" ColumnName="CorrelationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SubscribedSKUId" ColumnName="SubscribedSKUId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="Create.CSP.GitHub.Reporting.Database.Model.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCorrelationIdFromContext" FunctionName="Create.CSP.GitHub.Reporting.Database.Model.Store.GetCorrelationIdFromContext" />
+          <FunctionImportMapping FunctionImportName="SetCorrelationIdToContext" FunctionName="Create.CSP.GitHub.Reporting.Database.Model.Store.SetCorrelationIdToContext" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

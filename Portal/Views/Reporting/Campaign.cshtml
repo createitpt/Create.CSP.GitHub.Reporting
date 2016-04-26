@@ -1,0 +1,343 @@
+﻿@model ReportingCampaignViewModel
+@using ReportingPortal.Models
+@using ReportingPortal.Domain
+
+@{
+    ViewBag.Title = "New Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string title = Model.EditRecord ? "Edit Campaign" : "Add Campaign";
+    string addOrEditTitle = Model.EditRecord ? "Campaign edited" : "Campaign added";
+}
+
+<link href="@Url.Content("~/bower_components/bootstrap/dist/css/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css" />
+<div id="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">@title</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                @*<div class="panel-heading">
+                        Customers / Contracts
+                    </div>*@
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            @* After adding a customer with success *@
+                            @if (Model.RecordIsAddedOrUpdated)
+                            {
+                                string customers = Model.Campaign != null && Model.Campaign.Customers != null && Model.Campaign.Customers.Count > 0 ?
+                                    string.Join(", ", Model.Campaign.Customers.Where(x => x.CompanyProfile != null).Select(s => s.CompanyProfile.CompanyName)) : string.Empty;
+
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        @addOrEditTitle
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>Campaign Details</p>
+
+                                        <div class="table-responsive table-bordered">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Campaign Name</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
+                                                        <th>Customers</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>@Model.Campaign.Name</td>
+                                                        <td>@Model.Campaign.StartDate</td>
+                                                        <td>@Model.Campaign.EndDate</td>
+                                                        <td>@customers</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @* Form to create new customer *@
+                            using (Html.BeginForm(null, null, FormMethod.Post, new { id = "campaignForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                @Html.HiddenFor(model => model.Campaign.CampaignId,
+                                        new Dictionary<string, object> {
+                                            { "Name", "CampaignId" }
+                                        })
+
+                                @Html.HiddenFor(model => model.EditRecord,
+                                        new Dictionary<string, object> {
+                                            { "Name", "EditRecord" }
+                                        })
+
+                                <div class="row">
+                                    <div class="col-md-2 form-group">
+                                        <div>
+                                            <h2 class="">Campaign Name</h2>
+                                            @Html.TextBoxFor(model => model.Campaign.Name,
+                                        new Dictionary<string, object> {
+                                            { "placeholder", "Campaign Name" },
+                                            { "class", "form-control" },
+                                            { "Name", "Name" }
+                                        })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 form-group">
+                                        <div>Start</div>
+
+                                        <div class="input-group date" id="StartDate">
+                                            @Html.TextBoxFor(model => model.Campaign.StartDate,
+                                        new Dictionary<string, object> {
+                                            { "placeholder", "Start Date" },
+                                            { "class", "form-control" },
+                                            { "Name", "StartDate" }
+                                        })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 form-group">
+                                        <div>End</div>
+
+                                        <div class='input-group date' id='EndDate'>
+                                            @Html.TextBoxFor(model => model.Campaign.EndDate,
+                                        new Dictionary<string, object> {
+                                            { "placeholder", "End Date" },
+                                            { "class", "form-control" },
+                                            { "Name", "EndDate" }
+                                        })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <div class="listWrapper" style="display: inline-block; vertical-align:top; margin:0 2%;">
+                                            <h2 class="filterListHeader">Select List:</h2>
+                                            @if (Model.Customers != null && Model.Customers.Count > 0)
+                                            {
+                                                <ul class="list-unstyled filterList" style="height: 200px; overflow-y: auto;">
+                                                    @foreach (var customer in Model.Customers)
+                                                    {
+                                                        if (customer.CompanyProfile != null && !string.IsNullOrEmpty(customer.CompanyProfile.CompanyName))
+                                                        {
+                                                            <li><input id="@(customer.Id)" name="@(customer.Id)" type="checkbox"> <label for="@(customer.Id)">@(customer.CompanyProfile.CompanyName)</label></li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <div class="listWrapper" style="display: inline-block; vertical-align:top; margin:0 2%;">
+                                            <h2>Bucket List:</h2>
+                                            <p>Review your selections.</p>
+                                            <ul class="list-unstyled bucketList" id="clientCampaingList" style="height: 200px; margin-top: 20px; overflow-y: auto;">
+                                                @if (Model.Campaign != null && Model.Campaign.Customers != null && Model.Campaign.Customers.Count > 0)
+                                                {
+                                                    foreach (var customer in Model.Campaign.Customers)
+                                                    {
+                                                        if (customer.CompanyProfile != null && !string.IsNullOrEmpty(customer.CompanyProfile.CompanyName))
+                                                        {
+                                                            <li><input id="@(customer.Id)" name="@(customer.Id)" type="checkbox" checked="checked"> <label for="@(customer.Id)">@(customer.CompanyProfile.CompanyName)</label></li>
+                                                        }
+                                                    }
+                                                }
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="errorMessage" class="row">
+                                    <div class="col-md-3 alert alert-danger">
+                                        Please select one customer.
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="createCampaign" class="btn btn-default">Create</button>
+                                }
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "CampaignManagement")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/transition.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/collapse.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/locale/pt.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var errorMessage = $('#errorMessage');
+            errorMessage.hide();
+
+            $('#StartDate').datetimepicker({
+                format: "DD/MM/YYYY",
+                locale: 'pt'
+            });
+            $('#EndDate').datetimepicker({
+                format: "DD/MM/YYYY",
+                useCurrent: false,
+                locale: 'pt'
+            });
+            $("#StartDate").on("dp.change", function (e) {
+                $('#EndDate').data("DateTimePicker").minDate(e.date);
+            });
+            $("#EndDate").on("dp.change", function (e) {
+                $('#StartDate').data("DateTimePicker").maxDate(e.date);
+            });
+
+            var listToFilter = $('.filterList'),
+            listToFilterHeader = $('.filterListHeader'),
+            bucketList = $('.bucketList'),
+            timeout;
+
+            // custom css expression for a case-insensitive contains()
+            jQuery.expr[':'].Contains = function (a, i, m) {
+                return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+            };
+            function filterList(header, list) { // header is any element, list is an unordered list
+                // create and add the filter form to the header
+                var form = $("<form>").attr({ "class": "filterForm", "action": "#" }),
+                    input = $("<input>").attr({ "class": "filterInput", "type": "text", "style": "width: 250px" });
+                $(form).append(input).appendTo(header);
+                function filterOnKeyup(that) {
+                    var filter = that.val();
+                    if (filter) {
+                        // this finds all items in a list that contain the input,
+                        // and hides the ones not containing the input, while showing the ones that do
+                        var newList = list.find("li:not(:Contains(" + filter + "))").hide().end()
+                            .find("li:Contains(" + filter + ")").show();
+                    } else {
+                        list.find("li").show();
+                    }
+                    return false;
+                }
+                $(input).keyup(function () {
+                    // fire the above change event after every letter
+                    var that = $(this);
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function () { filterOnKeyup(that); }, 500);
+                });
+            }
+            filterList(listToFilterHeader, listToFilter);
+
+            // This code adds/removes items to/from the bucket-list
+
+            function addToBucketList(that) {
+                var listItem = that.parent('li').html();
+                bucketList.append('<li>' + listItem + '</li>');
+                bucketList.find('input').attr('checked', 'checked');
+            }
+            function removeFromBucketList(that) {
+                var listItem = that.parent('li').html();
+                listToFilter.prepend('<li>' + listItem + '</li>');
+                listToFilter.find('input').removeAttr('checked');
+            }
+            listToFilter.on('click', 'input', function () {
+                if ($(this).is(':checked')) {
+                    addToBucketList($(this));
+                    $(this).parent('li').remove();
+                }
+            });
+            bucketList.on('click', 'input', function () {
+                if ($(this).not(':checked')) {
+                    removeFromBucketList($(this));
+                    $(this).parent('li').remove();
+                }
+            });            
+
+            $("#createCampaign").click(function (e) {
+                e.preventDefault();
+
+                errorMessage.hide();
+
+                var form = $('#campaignForm').serializeArray();
+                var formObject = {};
+                $.each(form,
+                    function (i, v) {
+                        formObject[v.name] = v.value;
+                    });
+
+                var items = $('#clientCampaingList li label');
+
+                var values = $('#clientCampaingList li label').map(function () {
+                    return {
+                        'CustomerName': this.innerText,
+                        'CustomerId': this.htmlFor
+                    };
+
+                }).get();
+
+                if (values.length == 0) {
+                    errorMessage.show();
+
+                    return;
+                }
+
+                console.log(values);
+
+                var model = {
+                    'Campaign': formObject,
+                    'customersCampaign': values
+                };
+
+                var json = JSON.stringify(model);
+
+                $.ajax({
+                    url: '@Url.Action("Campaign", "Reporting")',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: json,
+                    type: 'POST'
+                }).success(function (data) {
+                    window.location.href = data;
+                }).fail(function (data) {
+
+                }).done(function (data) {
+
+                });
+            });
+        });
+
+    </script>
+}
