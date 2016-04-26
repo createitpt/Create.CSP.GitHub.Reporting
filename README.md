@@ -79,7 +79,7 @@ Note: To be able to associate customers to campaigns, first you must guarantee t
 (to be completed)
 
 
-Final disclaimer: The samples are provided freely and as a proof of concept with no support whatsoever.
+Final disclaimer: The samples are provided freely as a proof of concept as-is, with no support whatsoever.
 http://www.create.pt
 
 
