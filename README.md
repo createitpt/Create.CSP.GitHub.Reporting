@@ -1,11 +1,13 @@
 # Create.CSP.Reporting
-|create|it| Microsoft Cloud Solution Provider (CSP) Reporting Samples
+Create IT Microsoft Cloud Solution Provider (CSP) Reporting Samples
 
 This is a CSP Reporting sample application, intended for Microsoft CSP Partners, that provides Customer Insights (CI) and Opportunities Identification (OI) for Office 365 (seat based licensing). 
 
 The analysis made by the sample, complements and details the information that is available in the CSP Partner Center Portal, and also shows how with a basic set of rules the CSP customer basis can be segmented and classified in terms of:
 * Activation Opportunities - Seat related opportunities (e.g. A customer purchased 10 E3 seats but only 5 of them are assigned)
-* Usage Opportunities - Service usage opportunities (e.g. From the 5 assigned E3 seats, 2 licenses are not using Skype for Business)
+* Usage Opportunities - Last 30 days' service usage opportunities (e.g. From the 5 assigned E3 seats, 2 licenses have not used Skype for Business in the last 30 days)
+
+(At the end of this document, you can find more detail about the opportunity types that are identified.)
 
 Supplied with this information, the CSP Partner can for example determine and prioritize the customers that should be targeted by a Marketing Campaign, and/or work with their Sales and Support teams, to get these customers to make a better use of their purchased licenses and services.
 
@@ -73,7 +75,7 @@ The Reporting Job and the Reporting Portal both need a database connection to wo
 | Configuration Key  | Description |
 | ------------- | ------------- |
 | CSPDatabaseModelEntities connection string | The connection string to the Reporting Database.  |
-| Logging connection string | The connection string to the Reporting Database. Typically it refers to the same database as above.  |
+| Logging connection string | The connection string to the Reporting Database. Typically, it refers to the same database as above.  |
 
 # Usage
 ### Reporting Job
@@ -130,7 +132,36 @@ To refresh the report, follow these steps on Power BI Desktop:
 
 NOTE: The Power BI reports can be published to an Office 365 tenant with Power BI enabled, for easier sharing within a team.
 
-Final disclaimer: The samples are provided freely as a proof of concept as-is, with no support whatsoever.
+# Opportunity types
+The opportunities are classified by an Action Type and a Sub-Type detail. The detail is explanatory, indicating the reason for that classification.
+
+### Activation Opportunities
+The following types of opportunities are identified:
+
+| Action Type  | Action Sub Type |
+| ------------- | ------------- |
+| NO ACTION NEEDED | <ul><li>Customer is deleted or without relationship.</li><li>Waiting for subscription life cycle to de-provision subscription</li><li>All active licenses are assigned</li></ul>  |
+| ACTION NEEDED | <ul><li>All licenses assigned. Some licenses are about to expire</li><li>Customer has more users with licenses than licenses available</li></ul> |
+| ACTIVATION OPPORTUNITY |  <ul><li>Customer relationship to partner is different from reseller</li><li>Customer does not have any subscribed SKUs</li><li>Customer does not have any subscriptions</li><li>No seats active, assigned, about to expire or disabled</li><li>No seats assigned yet, all licenses are about to expire</li><li>Not a CSP offer</li><li>SKU capability status not enabled</li><li>No seats assigned yet</li><li>No seats assigned yet, some licenses are about to expire</li><li>Not all seats have been assigned yet</li></ul> |
+| Scenario not defined | If this occurs to you, please contact us :) |
+
+### Usage Opportunities
+The usage is analyzed taking into consideration the user's activity in the last 30 days.
+Currently, only usage referring to the following Office 365 services are supported:
+* Exchange Online
+* Skype for Business Online
+* SharePoint Online
+
+The following types of opportunities are identified:
+
+| Action Type  | Action Sub Type |
+| ------------- | ------------- |
+| NO ACTION NEEDED | <ul><li>Customer is deleted or without relationship</li><li>All users are active on the service</li></ul>  |
+| ACTIVATION OPPORTUNITY |  <ul><li>Customer relationship to partner different from reseller</li><li>Customer does not have any subscribed SKUs</li><li>Customer does not have any subscriptions</li><li>Subscription state: [state detail]</li><li>Not all users are active on the service</li></ul> |
+| Not supported | <ul><li>Subscription Offer does not map to any CSP Subscribed SKU Product</li><li>Service Plan information extraction not supported</li></ul> |
+| Scenario not defined | If this occurs to you, please contact us :) |
+
+Final disclaimer: These samples are provided freely as a proof of concept as-is, with no support whatsoever.
 
 http://www.create.pt
 
