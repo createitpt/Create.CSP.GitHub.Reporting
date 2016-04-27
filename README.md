@@ -1,19 +1,46 @@
 # Create.CSP.Reporting
-|create|it| Microsoft Cloud Solution Provider (CSP) Reporting Samples
+Create IT Microsoft Cloud Solution Provider (CSP) Reporting Samples
 
 This is a CSP Reporting sample application, intended for Microsoft CSP Partners, that provides Customer Insights (CI) and Opportunities Identification (OI) for Office 365 (seat based licensing). 
 
-The analysis made by the sample, complements and details the information that is available in the CSP Parter Center Portal, and also shows how with a basic set of rules the CSP customer basis can be segmented and classified in terms of:
+The analysis made by the sample, complements and details the information that is available in the CSP Partner Center Portal, and also shows how with a basic set of rules the CSP customer basis can be segmented and classified in terms of:
 * Activation Opportunities - Seat related opportunities (e.g. A customer purchased 10 E3 seats but only 5 of them are assigned)
-* Usage Opportunities - Service usage opportunities (e.g From the 5 assigned E3 seats, 2 licenses are not using Skype for Business)
+* Usage Opportunities - Last 30 days' service usage opportunities (e.g. From the 5 assigned E3 seats, 2 licenses have not used Skype for Business in the last 30 days)
+
+(At the end of this document, you can find more detail about the opportunity types that are identified.)
 
 Supplied with this information, the CSP Partner can for example determine and prioritize the customers that should be targeted by a Marketing Campaign, and/or work with their Sales and Support teams, to get these customers to make a better use of their purchased licenses and services.
 
 The sample is composed by:
  * A Reporting Job - Extracts and Analysis the customer information, that results in the Opportunities Identification. Can output information to CSV files or to a database, allowing in the case of the database to store and compare customer historic information.
+ * Power BI Reports (optional) - Provides reporting samples that present the extracted and analyzed information
  * A Reporting Portal (optional) - Provides a basic mechanism for managing the customers that are targeted by a campaign, allowing the filtering of the report to the campaign customer base. The actual management and sending of these campaigns are not in the scope of these samples.
- * Power BI Reports (optional) - Provides reporting samples that present the extracted and analysed information
  
+ 
+# Requirements
+
+### Minimum
+The minimum installation corresponds to the deployment of the Reporting Job, supporting only the output of information to CSV files. For this you will need:
+* .NET Framework 4.6.1
+* Internet Access
+
+You can also use this configuration if you just want to check/test these samples.
+
+### Recommended
+The recommended configuration corresponds to the deployment of the Reporting Job and the Power BI Reports. Optionally, you can also deploy the Reporting Portal if you think that filtering the customers by associated campaign is going to be useful for your scenario. For this you will need:
+* Reporting Job:
+  * .NET Framework 4.6.1
+  * SQL Server 2014 Database or SQL Azure V12 Database
+  * Internet Access
+  * Note: Can also run as an Azure Web Job
+* Power BI Reports:
+  * Power BI Desktop application 
+  * (optional) Office 365 Power BI enabled tenant, if you wish to publish the reports, and make sharing easier
+* (optional) Reporting Portal
+  * .NET Framework 4.6.1
+  * IIS Web Server
+  * Note: Can also run as an Azure Web App
+
 # Installation
 (Note: The instructions below require some prior technical knowledge to complete.)
 
@@ -43,12 +70,12 @@ The Reporting Job has several configurable settings in the app.config file. Set 
 | CSPCountryTwoLetterCode  | The country two letter code where the CSP tenant is registered. Example: US or UK or PT|
 
 ### CSP Reporting Database
-The Reporting Job and the Reporting Portal both need a database connection to work. If you choose to not use a database you can still use the job to export the reporting information to CSV files.
+The Reporting Job and the Reporting Portal both need a database connection to work. If you choose to not use a database, you can still use the job to export the reporting information to CSV files.
 
 | Configuration Key  | Description |
 | ------------- | ------------- |
 | CSPDatabaseModelEntities connection string | The connection string to the Reporting Database.  |
-| Logging connection string | The connection string to the Reporting Database. tipically it refers to the same database as above.  |
+| Logging connection string | The connection string to the Reporting Database. Typically, it refers to the same database as above.  |
 
 # Usage
 ### Reporting Job
@@ -60,7 +87,7 @@ The Reporting Job is a console application that accepts a single parameter. That
 | customerUsageCSV | Extracts and generates the Usage Opportunities report to a CSV file.  |
 | activationBD | Extracts and generates the Activation Opportunities report to the Reporting database.  |
 
-The generated CSV files have an header line, all fields are separated by the tab (\t) character, and there is no text qualifier surrounding fields.
+The generated CSV files have a header line, all fields are separated by the tab (\t) character, and there is no text qualifier surrounding fields.
 
 Note: It can take several hours for the job to process all customers. Also errors can occur while extracting and processing the customer information. In the case of error, the job tries to continue processing the remaining customers. More detailed information can be checked in the logs and on the exported information.
 
@@ -78,8 +105,64 @@ Note: To be able to associate customers to campaigns, first you must guarantee t
 ### Power BI Reports
 (to be completed)
 
+To work with the Power BI reports you will need to install and use the Power BI Desktop Application, available at: https://powerbi.microsoft.com/en-us/documentation/powerbi-desktop-get-the-desktop/#to-download-and-install-power-bi-desktop
 
-Final disclaimer: The samples are provided freely as a proof of concept as-is, with no support whatsoever.
+The Power BI Report files are named:
+ * CSP_CSV_Reports.pbix - For the CSV generated analysis
+ * CSP_Database_Reports.pbix - For the Database generated analysis
+
+#### Refreshing the reports data sources
+
+##### CSP CSV files
+To refresh the report, follow these steps on Power BI Desktop:
+
+1. Open the report file
+2. On the ribbon, "Home" tab, click "Edit Queries" <br/>
+![PowerBI_EditQueries](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_EditQueries.png)
+3. On left side, select the "Customers" table <br/>
+![PowerBI_SelectTable](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_SelectTable.png)
+4. On the right side, click on the “Source” ribbon <br/>
+![PowerBI_ChangeSource](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_ChangeSource.png)
+5. Select a new Path to *.csv report (note the settings presented in the picture) <br/>
+![PowerBI_BrowseCSV](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png)
+6. Repeat the last three steps and update the Subscriptions and Skus tables also
+
+##### CSP Reporting Database
+(to be completed)
+
+NOTE: The Power BI reports can be published to an Office 365 tenant with Power BI enabled, for easier sharing within a team.
+
+# Opportunity types
+The opportunities are classified by an Action Type and a Sub-Type detail. The detail is explanatory, indicating the reason for that classification.
+
+### Activation Opportunities
+The following types of opportunities are identified:
+
+| Action Type  | Action Sub Type |
+| ------------- | ------------- |
+| NO ACTION NEEDED | <ul><li>Customer is deleted or without relationship.</li><li>Waiting for subscription life cycle to de-provision subscription</li><li>All active licenses are assigned</li></ul>  |
+| ACTION NEEDED | <ul><li>All licenses assigned. Some licenses are about to expire</li><li>Customer has more users with licenses than licenses available</li></ul> |
+| ACTIVATION OPPORTUNITY |  <ul><li>Customer relationship to partner is different from reseller</li><li>Customer does not have any subscribed SKUs</li><li>Customer does not have any subscriptions</li><li>No seats active, assigned, about to expire or disabled</li><li>No seats assigned yet, all licenses are about to expire</li><li>Not a CSP offer</li><li>SKU capability status not enabled</li><li>No seats assigned yet</li><li>No seats assigned yet, some licenses are about to expire</li><li>Not all seats have been assigned yet</li></ul> |
+| Scenario not defined | If this occurs to you, please contact us :) |
+
+### Usage Opportunities
+The usage is analyzed taking into consideration the user's activity in the last 30 days.
+Currently, only usage referring to the following Office 365 services are supported:
+* Exchange Online
+* Skype for Business Online
+* SharePoint Online
+
+The following types of opportunities are identified:
+
+| Action Type  | Action Sub Type |
+| ------------- | ------------- |
+| NO ACTION NEEDED | <ul><li>Customer is deleted or without relationship</li><li>All users are active on the service</li></ul>  |
+| ACTIVATION OPPORTUNITY |  <ul><li>Customer relationship to partner different from reseller</li><li>Customer does not have any subscribed SKUs</li><li>Customer does not have any subscriptions</li><li>Subscription state: [state detail]</li><li>Not all users are active on the service</li></ul> |
+| Not supported | <ul><li>Subscription Offer does not map to any CSP Subscribed SKU Product</li><li>Service Plan information extraction not supported</li></ul> |
+| Scenario not defined | If this occurs to you, please contact us :) |
+
+Final disclaimer: These samples are provided freely as a proof of concept as-is, with no support whatsoever.
+
 http://www.create.pt
 
 
