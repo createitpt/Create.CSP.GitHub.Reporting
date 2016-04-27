@@ -248,7 +248,7 @@ namespace Create.CSP.GitHub.Reporting.Processors
                                 if (skuAndSubscriptions.DisabledSeats > 0)
                                 {
                                     skuAndSubscriptions.ActionType = "NO ACTION NEEDED";
-                                    skuAndSubscriptions.ActionSubType = "Waiting for subscription life cyle to deprovision subscription";
+                                    skuAndSubscriptions.ActionSubType = "Waiting for subscription life cycle to de-provision subscription";
                                 }
                             }
 
@@ -302,7 +302,7 @@ namespace Create.CSP.GitHub.Reporting.Processors
                             // There are active seats and all are assigned
                             // No seats are disabled or about to expire
                             skuAndSubscriptions.ActionType = "NO ACTION NEEDED";
-                            skuAndSubscriptions.ActionSubType = "Customer has all active licenses assigned";                            
+                            skuAndSubscriptions.ActionSubType = "All active licenses are assigned";                            
                             reportOutputItem.CustomerSubscribedSkuAndSubscriptions.Add(Program.Clone(skuAndSubscriptions));
                             continue;
                         }

@@ -153,7 +153,7 @@ namespace Create.CSP.GitHub.Reporting.Processors
                     if (subscriptionSubscribedSku == null)
                     {
                         reportOutputItem.GlobalActionType = "Not supported";
-                        reportOutputItem.GlobalActionSubType = "Subscription Offer does not map to any Subscribed SKU Product";
+                        reportOutputItem.GlobalActionSubType = "Subscription Offer does not map to any CSP Subscribed SKU Product";
                         results.Add(Program.Clone(reportOutputItem));
                         continue;
                     }
