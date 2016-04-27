@@ -3,17 +3,42 @@
 
 This is a CSP Reporting sample application, intended for Microsoft CSP Partners, that provides Customer Insights (CI) and Opportunities Identification (OI) for Office 365 (seat based licensing). 
 
-The analysis made by the sample, complements and details the information that is available in the CSP Parter Center Portal, and also shows how with a basic set of rules the CSP customer basis can be segmented and classified in terms of:
+The analysis made by the sample, complements and details the information that is available in the CSP Partner Center Portal, and also shows how with a basic set of rules the CSP customer basis can be segmented and classified in terms of:
 * Activation Opportunities - Seat related opportunities (e.g. A customer purchased 10 E3 seats but only 5 of them are assigned)
-* Usage Opportunities - Service usage opportunities (e.g From the 5 assigned E3 seats, 2 licenses are not using Skype for Business)
+* Usage Opportunities - Service usage opportunities (e.g. From the 5 assigned E3 seats, 2 licenses are not using Skype for Business)
 
 Supplied with this information, the CSP Partner can for example determine and prioritize the customers that should be targeted by a Marketing Campaign, and/or work with their Sales and Support teams, to get these customers to make a better use of their purchased licenses and services.
 
 The sample is composed by:
  * A Reporting Job - Extracts and Analysis the customer information, that results in the Opportunities Identification. Can output information to CSV files or to a database, allowing in the case of the database to store and compare customer historic information.
+ * Power BI Reports (optional) - Provides reporting samples that present the extracted and analyzed information
  * A Reporting Portal (optional) - Provides a basic mechanism for managing the customers that are targeted by a campaign, allowing the filtering of the report to the campaign customer base. The actual management and sending of these campaigns are not in the scope of these samples.
- * Power BI Reports (optional) - Provides reporting samples that present the extracted and analysed information
  
+ 
+# Requirements
+
+### Minimum
+The minimum installation corresponds to the deployment of the Reporting Job, supporting only the output of information to CSV files. For this you will need:
+* .NET Framework 4.6.1
+* Internet Access
+
+You can also use this configuration if you just want to check/test these samples.
+
+### Recommended
+The recommended configuration corresponds to the deployment of the Reporting Job and the Power BI Reports. Optionally, you can also deploy the Reporting Portal if you think that filtering the customers by associated campaign is going to be useful for your scenario. For this you will need:
+* Reporting Job:
+  * .NET Framework 4.6.1
+  * SQL Server 2014 Database or SQL Azure V12 Database
+  * Internet Access
+  * Note: Can also run as an Azure Web Job
+* Power BI Reports:
+  * Power BI Desktop application 
+  * (optional) Office 365 Power BI enabled tenant, if you wish to publish the reports, and make sharing easier
+* (optional) Reporting Portal
+  * .NET Framework 4.6.1
+  * IIS Web Server
+  * Note: Can also run as an Azure Web App
+
 # Installation
 (Note: The instructions below require some prior technical knowledge to complete.)
 
@@ -43,12 +68,12 @@ The Reporting Job has several configurable settings in the app.config file. Set 
 | CSPCountryTwoLetterCode  | The country two letter code where the CSP tenant is registered. Example: US or UK or PT|
 
 ### CSP Reporting Database
-The Reporting Job and the Reporting Portal both need a database connection to work. If you choose to not use a database you can still use the job to export the reporting information to CSV files.
+The Reporting Job and the Reporting Portal both need a database connection to work. If you choose to not use a database, you can still use the job to export the reporting information to CSV files.
 
 | Configuration Key  | Description |
 | ------------- | ------------- |
 | CSPDatabaseModelEntities connection string | The connection string to the Reporting Database.  |
-| Logging connection string | The connection string to the Reporting Database. tipically it refers to the same database as above.  |
+| Logging connection string | The connection string to the Reporting Database. Typically it refers to the same database as above.  |
 
 # Usage
 ### Reporting Job
@@ -60,7 +85,7 @@ The Reporting Job is a console application that accepts a single parameter. That
 | customerUsageCSV | Extracts and generates the Usage Opportunities report to a CSV file.  |
 | activationBD | Extracts and generates the Activation Opportunities report to the Reporting database.  |
 
-The generated CSV files have an header line, all fields are separated by the tab (\t) character, and there is no text qualifier surrounding fields.
+The generated CSV files have a header line, all fields are separated by the tab (\t) character, and there is no text qualifier surrounding fields.
 
 Note: It can take several hours for the job to process all customers. Also errors can occur while extracting and processing the customer information. In the case of error, the job tries to continue processing the remaining customers. More detailed information can be checked in the logs and on the exported information.
 
@@ -87,7 +112,7 @@ The Power BI Report files are named:
 #### Refreshing the reports data sources
 
 ##### CSP CSV files
-To refresh the report follow these steps on Power BI Desktop:
+To refresh the report, follow these steps on Power BI Desktop:
 
 1. Open the report file
 2. On the ribbon, "Home" tab, click "Edit Queries" <br/>
@@ -103,9 +128,10 @@ To refresh the report follow these steps on Power BI Desktop:
 ##### CSP Reporting Database
 (to be completed)
 
-NOTE: The Power BI reports can be published to a Office 365 tenant with Power BI enabled, for easier sharing within a team.
+NOTE: The Power BI reports can be published to an Office 365 tenant with Power BI enabled, for easier sharing within a team.
 
 Final disclaimer: The samples are provided freely as a proof of concept as-is, with no support whatsoever.
+
 http://www.create.pt
 
 
