@@ -459,8 +459,11 @@ namespace Create.CSP.GitHub.Reporting.Processors
                         subscribedSku.ActionType ?? string.Empty,
                         // Action Subtype
                         subscribedSku.ActionSubType ?? string.Empty);
-                }
+                }              
             }
+
+            // Remove last new line
+            result = result.Remove(result.Length - 1, 1);
 
             return result.ToString();
         }
