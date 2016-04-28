@@ -129,7 +129,7 @@ Afterwards, follow these steps on Power BI Desktop:
 | Customers | Usage |
 | Subscriptions | Usage |
 | Skus | Activation |
-<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png" alt="PowerBI_BrowseCSV" width="60%" />
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png" alt="PowerBI_BrowseCSV" width="60%" /> <br/>
 6. Repeat the last three steps and update the Subscriptions and Skus tables also
 
 ##### CSP Reporting Database
