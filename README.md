@@ -103,32 +103,54 @@ You can use the Portal to:
 Note: To be able to associate customers to campaigns, first you must guarantee that a run of the Reporting Job (with the database parameter) as completed with success. If not, the customer list will be empty or only partially complete.
 
 ### Power BI Reports
-(to be completed)
-
 To work with the Power BI reports you will need to install and use the Power BI Desktop Application, available at: https://powerbi.microsoft.com/en-us/documentation/powerbi-desktop-get-the-desktop/#to-download-and-install-power-bi-desktop
 
 The Power BI Report files are named:
  * CSP_CSV_Reports.pbix - For the CSV generated analysis
  * CSP_Database_Reports.pbix - For the Database generated analysis
 
-#### Refreshing the reports data sources
+#### Configuring / Updating the reports data sources
 
 ##### CSP CSV files
-To refresh the report, follow these steps on Power BI Desktop:
+To configure the report, you must first run the Reporting Job and generate the Activation and the Usage CSV files.
+Afterwards, follow these steps on Power BI Desktop:
 
 1. Open the report file
 2. On the ribbon, "Home" tab, click "Edit Queries" <br/>
-![PowerBI_EditQueries](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_EditQueries.png)
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_EditQueries.png" alt="PowerBI_EditQueries" width="60%" />
 3. On left side, select the "Customers" table <br/>
-![PowerBI_SelectTable](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_SelectTable.png)
-4. On the right side, click on the “Source” ribbon <br/>
-![PowerBI_ChangeSource](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_ChangeSource.png)
-5. Select a new Path to *.csv report (note the settings presented in the picture) <br/>
-![PowerBI_BrowseCSV](https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png)
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_SelectTable.png" alt="PowerBI_SelectTable" width="10%" />
+4. On the right side, click on the “Source” icon <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_ChangeSource.png" alt="PowerBI_ChangeSource" width="10%" />
+5. Select a new Path to the appropriate *.csv report (note the settings presented in the table and on the picture) 
+
+| Table  | CSV File to choose |
+| ------------- | ------------- |
+| Customers | Usage |
+| Subscriptions | Usage |
+| Skus | Activation |
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png" alt="PowerBI_BrowseCSV" width="60%" /> <br/>
 6. Repeat the last three steps and update the Subscriptions and Skus tables also
 
 ##### CSP Reporting Database
-(to be completed)
+To configure the report, follow these steps on Power BI Desktop:
+
+1. Open the report file
+2. On the ribbon, "Home" tab, click "Edit Queries" <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_EditQueries.png" alt="PowerBI_EditQueries" width="60%" />
+3. On left side, select the "ActivationReport" table <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_SelectTables.png" alt="PowerBI_SelectTable" width="10%" />
+4. On the right side, click on the “Source” icon <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_ChangeSource.png" alt="PowerBI_ChangeSource" width="10%" />
+5. Complete with your SQL Server database connection information <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_ConfigureServer.png" alt="PowerBI_DB_ConfigureServer" width="30%" />
+6. Repeat the last three steps and update all the other tables also
+7. Complete with your server credentials <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_ServerCredentials.png" alt="PowerBI_DB_ServerCredentials" width="30%" /> <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_ServerCredentials2.png" alt="PowerBI_DB_ServerCredentials" width="30%" /> 
+8. If necessary, update your data privacy configuration <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_DataPrivacy.png" alt="PowerBI_DB_DataPrivacy" width="30%" /> <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_DataPrivacy2.png" alt="PowerBI_DB_DataPrivacy" width="30%" /> 
 
 NOTE: The Power BI reports can be published to an Office 365 tenant with Power BI enabled, for easier sharing within a team.
 
