@@ -130,7 +130,9 @@ Afterwards, follow these steps on Power BI Desktop:
 | Subscriptions | Usage |
 | Skus | Activation |
 <img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_BrowseCSV.png" alt="PowerBI_BrowseCSV" width="60%" /> <br/>
-6. Repeat the last three steps and update the Subscriptions and Skus tables also
+6. Repeat the last three steps and update the Subscriptions and Skus tables also <br/>
+7. To finish, on the ribbon, click "Close & Apply" <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_CloseApply.png" alt="PowerBI_CloseApply" width="5%" /> 
 
 ##### CSP Reporting Database
 To configure the report, follow these steps on Power BI Desktop:
@@ -151,6 +153,8 @@ To configure the report, follow these steps on Power BI Desktop:
 8. If necessary, update your data privacy configuration <br/>
 <img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_DataPrivacy.png" alt="PowerBI_DB_DataPrivacy" width="30%" /> <br/>
 <img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_DB_DataPrivacy2.png" alt="PowerBI_DB_DataPrivacy" width="30%" /> 
+9. To finish, on the ribbon, click "Close & Apply" <br/>
+<img src="https://github.com/createitpt/Create.CSP.GitHub.Reporting/blob/master/WikiImages/PowerBI_CloseApply.png" alt="PowerBI_CloseApply" width="5%" /> 
 
 NOTE: The Power BI reports can be published to an Office 365 tenant with Power BI enabled, for easier sharing within a team.
 
