@@ -64,7 +64,7 @@ The Reporting Job has several configurable settings in the app.config file. Set 
 | ------------- | ------------- |
 | CSPTenantName  | The default domain of the CSP Tenant with Microsoft. (This is typically an "onmicrosoft.com" domain.)  |
 | CSPTenantId  | The Microsoft Id of the CSP Tenant. This can be retrieved from the Partner Center Portal.  |
-| AzureADAppId-NativeApplication  | The id of the native tenant application registered in the CSP AD directory with permissions to access the Partner Center SDK API (see https://msdn.microsoft.com/en-us/library/partnercenter/mt267552.aspx - section Enable API access; and/or https://msdn.microsoft.com/en-us/library/partnercenter/mt634709.aspx  - section Configure authentication for Partner Center APIs) |
+| AzureADAppId-NativeApplication  | The id of the native tenant application registered in the CSP AD directory with permissions to access the Partner Center SDK API (see https://msdn.microsoft.com/en-us/library/partnercenter/mt267552.aspx - section Enable API access; and/or https://msdn.microsoft.com/en-us/library/partnercenter/mt634709.aspx  - section Configure authentication for Partner Center APIs). The application should have explicit permissions for Azure Active Directory "Read directory data", and Pre-Consent should also be enabled (see powershell script in the "Scripts" directory). |
 | CSPAdminUsername  | Partner Center service account username. A Helpdesk agent account type is sufficient.  |
 | CSPAdminPassword  | Partner Center service account password. The previous account password.|
 | CSPCountryTwoLetterCode  | The country two letter code where the CSP tenant is registered. Example: US or UK or PT|
