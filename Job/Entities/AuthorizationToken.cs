@@ -42,7 +42,7 @@ namespace Create.CSP.GitHub.Reporting.Entities
         public bool IsNearExpiracy()
         {
             //// if token is expiring in the next minute or expired, return true
-            return DateTime.UtcNow > this.ExpiresOn.AddMinutes(-1);
+            return DateTime.UtcNow.ToLocalTime() > this.ExpiresOn.AddMinutes(-1);
         }
     }
 }
