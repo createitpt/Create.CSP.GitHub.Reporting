@@ -34,7 +34,8 @@ namespace Create.CSP.GitHub.Reporting.Database.Model.Managers
             {
                 Id = Guid.NewGuid(),
                 StartDateTime = DateTime.UtcNow,
-                Status = "RUNNING"
+                Status = "RUNNING",
+                EndDateTime = null                
             });
         }
 

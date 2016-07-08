@@ -505,7 +505,7 @@ warning 6002: The table/view 'Create.CSP.Reporting.dbo.Log' does not have a prim
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" Nullable="true" />
           <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ActivationReports" Relationship="Self.FK_ActivationReport_CorrelationIds" FromRole="CorrelationIds" ToRole="ActivationReport" />
           <NavigationProperty Name="Customers_History" Relationship="Self.FK_Customers_History_CorrelationIds" FromRole="CorrelationIds" ToRole="Customers_History" />
