@@ -625,6 +625,10 @@ namespace Create.CSP.GitHub.Reporting.Processors
             }
             finally
             {
+                //if (capturedException != null)
+                //{
+                //    capturedException.Throw();
+                //}
             }
         }
 

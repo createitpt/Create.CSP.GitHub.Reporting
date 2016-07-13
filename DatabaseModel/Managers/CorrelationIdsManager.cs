@@ -16,16 +16,13 @@ namespace Create.CSP.GitHub.Reporting.Database.Model.Managers
         }
 
         #region Create
-              
+
         private async Task<CorrelationId> AddAsync(CorrelationId correlationId)
         {
-            using (var dbContext = new CSPDatabaseModelEntities())
-            {
-                CorrelationId newCorrelationId = dbContext.CorrelationIds.Add(correlationId);
-                await dbContext.SaveChangesAsync();
+            CorrelationId newCorrelationId = _dbContext.CorrelationIds.Add(correlationId);
+            await _dbContext.SaveChangesAsync();
 
-                return newCorrelationId;
-            }
+            return newCorrelationId;
         }
 
         public Task<CorrelationId> AddNewRunAsync()
@@ -35,7 +32,7 @@ namespace Create.CSP.GitHub.Reporting.Database.Model.Managers
                 Id = Guid.NewGuid(),
                 StartDateTime = DateTime.UtcNow,
                 Status = "RUNNING",
-                EndDateTime = null                
+                EndDateTime = null
             });
         }
 
@@ -45,25 +42,28 @@ namespace Create.CSP.GitHub.Reporting.Database.Model.Managers
 
         private async Task<CorrelationId> UpdateAsync(CorrelationId correlationId)
         {
-            using (var dbContext = new CSPDatabaseModelEntities())
-            {
-                dbContext.Entry(correlationId).State = EntityState.Modified;
-                await dbContext.SaveChangesAsync();
 
-                return correlationId;
-            }
+            _dbContext.Entry(correlationId).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return correlationId;
         }
 
         public Task<CorrelationId> UpdateEndStatusAsync(Guid correlationId, string endStatus)
         {
-            CorrelationId databaseCorrelationId = new CorrelationId()
-            {
-                Id = correlationId,
-                EndDateTime = DateTime.UtcNow,
-                Status = endStatus
-            };
 
-            return this.UpdateAsync(databaseCorrelationId);
+            // Get object to update
+            var existentCorrelation = _dbContext.CorrelationIds.FirstOrDefault(c => c.Id == correlationId);
+            if (existentCorrelation == null)
+            {
+                throw new ArgumentException("Could not find existent correlation id: " + correlationId);
+            }
+
+            // else. Update
+            existentCorrelation.EndDateTime = DateTime.UtcNow;
+            existentCorrelation.Status = endStatus;
+
+            return this.UpdateAsync(existentCorrelation);
+
         }
 
         #endregion
